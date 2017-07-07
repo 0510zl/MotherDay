@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta http-equiv="pragram" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache, must-revalidate">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>母亲节，勿忘初心</title>
+    <link href="./css/reset.css" type="text/css" rel="stylesheet" />
+    <link href="./css/index.css?id=2014428" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="container">
+        <div class="page page1" style="display:none">
+            <div class="banner"><img src="./images/top-banner.jpg"></div>
+            <div class="searchbox">
+                <input type="text" placeholder="请输入编号查询">
+                <button class="search">查询</button>
+            </div>
+            <div class="motherslist">
+                <p class="warn">"没有你查询的数据，请确认你的编号的数据正确性"</p>
+                <ul class="clearfix">
+                    <li>
+                        <P class="img"><img src="./images/01.jpg" /></P>
+                        <p class="title">叶子和她妈妈1</p>
+                        <div class="numinfo clearfix">
+                            <div class="num">编号:
+                                <lable>1001</lable>
+                            </div>
+                            <div class="zan">
+                                <a class="zanicon"><img src="./images/aixin2.png" /></a><span class="zannum">3001</span></div>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="img"><img src="./images/02.jpg" /></p>
+                        <p class="title">叶子和她妈妈</p>
+                        <div class="zan">
+                            <a class="zanicon"><img src="./images/aixin2.png" /></a><span class="zannum">3001</span></div>
+                    </li>
+                    <li>
+                        <p class="img"><img src="./images/03.jpg" /></p>
+                        <p class="title">叶子和她妈妈</p>
+                        <div class="zan">
+                            <a class="zanicon"><img src="./images/aixin2.png" /></a><span class="zannum">3001</span></div>
+                    </li>
+                    <li>
+                        <p class="img"><img src="./images/04.jpg" /></p>
+                        <p class="title">叶子和她妈妈</p>
+                        <div class="zan">
+                            <a class="zanicon"><img src="./images/aixin1.png" /></a><span class="zannum">3001</span></div>
+                    </li>
+                    <li>
+                        <p class="img"><img src="./images/05.jpg" /></p>
+                        <p class="title">叶子和她妈妈</p>
+                        <div class="zan">
+                            <a class="zanicon"><img src="./images/aixin1.png" /></a><span class="zannum">3001</span></div>
+                    </li>
+                    <li>
+                        <p class="img"><img src="./images/06.jpg" /></p>
+                        <p class="title">叶子和她妈妈</p>
+                        <div class="zan">
+                            <a class="zanicon"><img src="./images/aixin1.png" /></a><span class="zannum">3001</span></div>
+                    </li>
+                </ul>
+            </div>
+            <div class="addmore" ><button class="primary-but" type="button" style="display:none;">+加载更多</button></div>
+        </div>
+        <div class="page page2 motherinfo" style="display:none;">
+            <h3>叶子和她妈妈</h3>
+            <div class="zan">
+                <a class="zanicon"><img src="./images/aixin2.png" /> 喜欢</a><span class="zannum">3001</span></div>
+            <p class="info">
+                一首以思念妈妈为主题怀旧歌曲，正如盛夏的凉风，吹过今天乐坛。这首歌词、曲、唱，都由乐坛新人翟廷军独立完成，中国原创音乐社区负责编曲及发行。
+            </p>
+            <div class="piclist">
+                <h4></h4>
+                <ul>
+                    <li><img src="./images/01.jpg"></li>
+                    <li><img src="./images/02.jpg"></li>
+                    <li><img src="./images/03.jpg"></li>
+                    <li><img src="./images/04.jpg"></li>
+                    </lu>
+            </div>
+        </div>
+        <div class="page page3 joinus" style="display:none">
+            <h3>说出我和我妈妈的故事</h3>
+            <form method="post" enctype="multipart/form-data" action="javascript:void(0)">
+                <h4>你的姓名</h4>
+                <lable class="name" name="name"></lable>
+                <h4>说给妈妈的话：</h4>
+                <textarea name="msg" class="msg"></textarea>
+                <h4>我跟妈妈的美丽瞬间：</h4>
+                <!--dddd-->
+                <div class="chosebut">
+                    <span onclick="file.click()" class="chosefile">选择文件</span>
+                    <lable>可选择1~4张</lable>
+                </div>
+                <input type="file" id="file" class="fileinput" accept="image/*" />
+                <div class="uppiclist">
+                    <ul class="clearfix">
+                        <li>
+                            <div class="pic"><img src="./images/01.jpg"></div>
+                            <div class="del"><img src="./images/delete.png" /></di>
+                        </li>
+                        <li>
+                            <div class="pic"><img src="./images/02.jpg"></div>
+                            <div class="del"><img src="./images/delete.png" /></di>
+                        </li>
+                        <li>
+                            <div class="pic"><img src="./images/03.jpg"></div>
+                            <div class="del"><img src="./images/delete.png" /></di>
+                        </li>
+                        <li>
+                            <div class="pic"><img src="./images/04.jpg"></div>
+                            <div class="del"><img src="./images/delete.png" /></di>
+                        </li>
+                    </ul>
+                    </div>
+                    <button class="primary-but" type="submit">确认提交</button>
+            </form>
+            </div>
+            <div class="page page4" style="display:none;">
+                <div class="banner"><img src="./images/top-banner.jpg"></div>
+                <dib class="ranklist">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>名次</th>
+                                <th>排名</th>
+                                <th>票数</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><img src="images/upload/20170426/149317221858fffffa099d7.jpg" />卓卓包</td>
+                                <td>7195</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td><img src="images/upload/20170426/149317221858fffffa099d7.jpg" />卓卓包</td>
+                                <td>7195</td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </div>
+            <div class="page page5" style="display:none;" >
+                <div class="banner"><img src="./images/top-banner.jpg"></div>
+                <div class="gameintro"><P class="atter">我们只是给你看的玩玩的，不代表任何实质性的东西!!!</p></div>
+                <div class="gameintro">
+                    <h4>奖项设置:</h4>
+                    <h6><em>一等奖</em>：奢华温馨烛光晚餐一次、精美纪念奖杯一个</h6>
+                    <h6><em>二等奖</em>：价值200元手机充值卡一张</h6>
+                    <h6><em>三等奖</em>：价值100元手机充值卡一张</h6>
+                    <p class="war">备注：奖项设置原则上每个等级名额一名，若有排名相同者，则相应增加奖项名额</p>
+                    <h4>活动流程</h4>
+                    <h6><em>5月5日-5月10日</em>，参与投票评选活动</h6>
+                    <p class="war">投票注意事项：</p>
+                    <div class="box">
+                        <p>（1）打开后台发送的链接，上传照片、完善资料并转发至朋友圈或转发给 朋友后即可呼吁参与投票
+                        </p>
+                        <p>（2）活动截止于5月10日24点，过时票数将不纳入统计</p>
+                        <p>（2）每个用户每天只能参与一次投票</p>
+                        <p>（3）秉承公平、公正原则，禁止恶意刷票、买票行为，若经发 现，将取消参选资格
+                        </p>
+                    </div>
+                    <h6><em>5月10日</em>，工作人员统计票数，活动平台也将实时、透明的展现每位参选者的票数及排名情况</h6>
+                    <h6><em>5月11日</em>，烛光晚参公众平台公布获奖结果</h6>
+                    <h6><em>5月12日</em>颁发奖品（餐厅名待定，但由于后台粉丝全国范围，所以一定要连锁餐厅） </h6>
+                    <p class="war"> 颁奖事项：</p>
+                    <div class="box">
+                        <p>（1）一等奖获奖者将地址、手机号发送至微信后台，奖品以快递的形式发送 至获奖者手中
+                        </p>
+                        <p>（2）二等奖、三等奖获奖者后台留言，届时将手机充值卡号发送至各位手机</p>
+                    </div>
+                    <h6> <em>5月14日</em>，与妈妈共进晚餐（获奖者需要拍摄当天晚餐图片发送至烛光晚餐后台及朋友圈）</h6>
+                    <h6><em>5月15日</em>，整理网友活动照片及素材总结活动推广后续报道</h6>
+                </div>
+            </div>
+            </div>
+            <div class="menu" style="display:none">
+                <ul class="clearfix">
+                    <li class="topage1">
+                        <a href="javascript:void(0);">活动主页</a>
+                    </li>
+                    <li class="topage4">
+                        <a href="javascript:void(0);">排行榜</a>
+                    </li>
+                    <li class="topage5">
+                        <a href="javascript:void(0);">活动说明</a>
+                    </li>
+                    <li class="topage3"> <a href="javascript:void(0);">我与妈妈的故事</a></li>
+                </ul>
+            </div>
+            <div class="dialog-dropback" style="display:none">
+                <div class="container">
+                    <div class="head"> 恭喜提交成功</div>
+                    <div class="content">
+                        <p>
+                            恭喜,您已经成功参加我们的母亲节活动，<em>您的编号是：1022</em>。</p>
+                        <p>点击右上角的按钮分享到朋友圈，让妈妈获得更多人的爱吧!</p>
+                    </div>
+                    <div class="footer">
+                        <button class="confirm">确认</button>
+                    </div>
+                </div>
+            </div>
+            </div>
+</body>
+<script data-main="./js/main" src="./js/libs/require.js?id=2017428-2"></script>
+<!-- <script src="./js/libs/zepto.js" type="text/javascript"></script>
+<script>
+   $(document).ready(function(){
+
+   })
+</script> -->
+
+</html>
