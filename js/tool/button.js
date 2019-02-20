@@ -26,8 +26,9 @@ define(function(require) {
             $(".page3").show();
             $(".page3 form").hide();
             //accord to openid judge is taken
-            console.log("button-page3-openid！" + user.openid);
+           
             datahandle().getDataByopenId(user.openid).then(function(data) {
+                if(data){  
                 //不相关的不显示
                 $(".page3").find(".chosebut").css('display', 'none');
                 $(".page3").find("button[type=submit]").css('display', 'none');
@@ -39,28 +40,25 @@ define(function(require) {
                     txt = txt + "<li><div class='pic'><img src='" + item + "' ></div></li>";
                 })
                 $(".page3").find(".uppiclist ul").html(txt);
-                $(".page3 form").show();
-            }, function(data) {
-                console.log("has't me！");
-                $(".page3").find(".name").html(user.nickname);
-                $(".page3").find(".msg").html("");
-                $(".uppiclist ul").empty();
-                $(".page3 form").show();
+                
+                 }else{
+                    $(".page3").find(".name").html(user.nickname);
+                    $(".page3").find(".msg").html("");
+                    $(".uppiclist ul").empty();               
+                 }
+                 $(".page3 form").show();
             }).catch(function(err) {
-                console.log(err);
+                alert(err);
             });
-
-            //  $_this.on('tap');
+           
         } else if (mname === "topage4") {
             var txt = "",
                 num = 0;
             $(".page").hide();
              $(".page4 .ranklist").empty();
             datahandle().getData().then(function(data) {
-                data=tool.sortDate(data);
-                // data.forEach(function(item,index){
-                //     console.log("datasort:"+item.name+item.lover);
-                // });
+                if(data){ 
+                data=tool.sortDate(data);                
                 txt = "<table><thead><tr><th>名次</th><th>排名</th><th>票数</th></tr></thead><tbody>";
                 data.forEach(function(item, index) {
                     num++;
@@ -73,14 +71,14 @@ define(function(require) {
                 txt = txt + "</tbody></table>";
                 $(".page4 .ranklist").html(txt);
                 $(".page4").show();
-
-
-            }, function(data) {
-                txt="<p class='warn'>暂无数据</p>";
+             }else{
+                  txt="<p class='warn'>暂无数据</p>";
                 $(".page4 .ranklist").html(txt);
                 $(".page4").show();
+             }
+
             }).catch(function(err) {
-                console.log(err);
+                alert(err);
             })
 
         } else if (mname === "topage5") {
@@ -91,33 +89,30 @@ define(function(require) {
     })
 
     //page1 按钮绑定
-    $(".searchbox button").tap(function(e) {
-        console.log("-------enter searchbox-------------");
-        e.preventDefault();
-        e.stopPropagation();
+    $(".searchbox button").tap(function(e) {      
+        e.preventDefault();       
         var _this = $(this);
         var id = _this.parent().find("input[type=text]").val();
         if (!id) {
             alert("请输入查询编号");
             return;
-        }
-        console.log(_this.parent().find("input[type=text]").val());
-
+        };
+      
         datahandle().getDataById(id).then(function(data) {
-            console.log(data);
+           if(data){ 
             page1_dataShow.showdata({'id':id});
-
-
-        }, function(data) {
-
-            console.log("暂无数据")
+        }else{
+            
             $(".motherslist").empty();
             $(".motherslist").html("<p class='warn'>没有你查询的数据，请确认你的编号的数据正确性</p>");
-        }).catch(function(err) { console.log(err); })
+        }
+
+
+        }).catch(function(err) { alert(err); })
 
     })
 
-    //page3 按钮绑定
+   
 
 
 

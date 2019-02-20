@@ -11,25 +11,19 @@ define(function(require) {　
             var timed = time.getTimenyr();
             var url = './data/vote' + timed + '.json';
 
-            return new Promise(function(resolve, reject) {
-                console.log(timed + url);
+            return new Promise(function(resolve, reject) {               
                 try {
                     $.getJSON(url + '?ran=' + new Date(), function(data) {
-                        if (data) {
-                            data.data.forEach(function(item) {
-                                console.log(item)
-                            });
+                        if (data) {                           
                             return resolve(data.data);
-                        } else {
-                            console.log("no data");
-                            return reject(false);
+                        } else {                           
+                            return reject("暂无数据");
                         }
 
                     });
 
-                }catch(e){
-                    console.log("no data!")
-                    return reject(false);
+                }catch(e){                   
+                    return reject("获取数据出错，请联系管理员");
                 }
             })
 
@@ -49,11 +43,11 @@ define(function(require) {　
                         if (data) {
                             return resolve(data.data);
                         } else {
-                            return reject(data);
+                            return reject("存入数据出错,请联系管理员");
                         }
                     })
                 } else {
-                    return reject(data);
+                    return reject("无发获取存入数据,请联系管理员");
                 }
 
             });
@@ -62,37 +56,30 @@ define(function(require) {　
 
         },
         getDataByOpenid: function(openid) {
-            var _this = this;
-            console.log("Votehandle-getDataByOpenid-user-openid" + openid);
+            var _this = this;            
             var arrVoteId = [];
-
             return new Promise(function(resolve, reject) {
                 if (openid) {
                     _this.getData().then(function(data) {
-
                         if (data) {
                             data.forEach(function(item, index) {
                                 if (item.openid === openid) {
                                     arrVoteId.push(item)
                                 }
 
-                            })
-                            console.log("Votehandle-getDataByOpenid-35-arrVoteId" + arrVoteId);
+                            })                            
                             resolve(arrVoteId);
                         } else {
-                            reject(false);
+                            reject("获取数据出错，请联系管理员");
                         }
 
-                    }, function(data) {
-                        reject(false);
-
                     }).catch(function(err) {
-                        console.log(err);
+                         reject("获取数据出错，请联系管理员");
 
                     });
 
                 } else {
-                    return reject(false)
+                    return reject("Id值不存在，请联系管理员")
                 }
 
 
@@ -106,48 +93,36 @@ define(function(require) {　
             return new Promise(function(resolve, reject) {
                 var timed = time.getTimenyr();
                 if (timed === "201755") {
-                    return reject("end");
+                    return reject("活动结束");
                 };
                 if (!openid || !id) {
-                    return reject(false);
+                    return reject("Id值不存在，请联系管理员");
                 };
                 _this.getData().then(function(data) {
 
                     if (data) {
-                        data.forEach(function(item, index) {
-                            console.log(item.openid + "-----" + id + "------" + openid);
+                        data.forEach(function(item, index) {                           
                             if (item.openid === openid) {
-                                count++;
-                                console.log("count" + count);
+                                count++;                               
                             }
-                            if (item.openid === openid && item.loverid == id) {
-                                console.log("Votehandle——checkDataByopenid-reject");
-
+                            if (item.openid === openid && item.loverid == id) {                              
                                 flag = true;
-                                return reject("has");
+                                return reject("已经点赞");
                             }
 
                         })
-                        if (count > 3) {
-                            console.log("countmore" + count);
-                            return reject("more");
-
+                        if (count > 3) {                           
+                            return reject("今日点赞超过3次，请明日再来");
                         }
-                        if (!flag) {
-                            console.log("Votehandle——checkDataByopenid-resolve1");
-                            return resolve(true);
+                        if (!flag) {                            
+                            return resolve("点赞成功");
                         }
-
 
                     }
 
 
-
-                }, function(data) {
-                    return resolve(true);
-
                 }).catch(function(err) {
-                    console.log(err);
+                   return resolve(err);
 
                 });
 

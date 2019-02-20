@@ -63,7 +63,7 @@ define(function(require) {　
             var fileInput = $(".fileinput");
             var fileImage = $(".uppiclist ul");
             var _this = $(obj);
-            console.log(fileImage.find("li").length)
+            //console.log(fileImage.find("li").length)
 
             if (fileImage.find("li").length > 3) {
                 alert("最多可以选择4张");

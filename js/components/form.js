@@ -60,27 +60,18 @@ define(function(require) {
                             'piclist': rdata
                         };
 
-                        datahandle().writeData(formobj).then(function(data) {
-                            console.log("data.msg.data" + data.msg);
+                        datahandle().writeData(formobj).then(function(data) {                           
                             redata = data;
                             return votehandle().getData();
 
-                        }, function(data) {
-                            console.log("error");
-                        }).then(function(data) {
-                            console.log("has data");
+                        }).then(function(data) {                           
                             formSubmitAfter(data);
-
-                        }, function(data) {
-                             console.log("no data");
-                            formSubmitAfter();
 
                         }).catch(function(err) {
                             console.log(err);
                         });
 
-                        function formSubmitAfter(data) {
-                             console.log("formSubmitAfter");
+                        function formSubmitAfter(data) {                          
                             var datalist = redata.msg.data;
                             if (data) {
                                 datalist.loverlist = "";
@@ -96,7 +87,6 @@ define(function(require) {
                                     title: "提交成功",
                                     content: msg
                                 }).show(function() {
-
                                     //显示首页
                                     $(".page").hide();
                                     $(".page1").show();
@@ -108,19 +98,16 @@ define(function(require) {
                         }
 
 
-                    }, function(data) {
-
                     }).catch(function(err) {
-                        console.log(err)
+                        alert(err)
 
                     });
 
 
             }, 1000)
 
-        } else {
-            console.log('fileArr is not exist!')
-            return false;
+        } else {            
+           alert("图片地址获取失败请联系管理员");
         }
     };
 

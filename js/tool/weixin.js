@@ -20,20 +20,15 @@ define(function(require) {
                         //没有关注
                         window.location.href = url + 'fllow.html?time=' + ((new Date()).getTime());
 
-                    } else {
-                        // $.each(data, function(name, value) {
-                        //      console.log("oauth2" + name+value);
-                        // });
+                    } else {                     
                         if (data.errcode) {
-                            tool.toreload();
-                            return;
+                            tool.toreload();                           
                         } else {
                             var userobj = {
                                 'openid': data.openid,
                                 'nickname': data.nickname
                             };
-                            sessionStorage.setItem('user', JSON.stringify(userobj))
-                            var user = JSON.parse(sessionStorage.getItem('user'));
+                            sessionStorage.setItem('user', JSON.stringify(userobj));                            
                             $(".menu").show();
                             page1_dataShow.showdata();
 
@@ -41,15 +36,13 @@ define(function(require) {
 
                     }
                 },
-                error: function(data) {
-                    console.log("获取失败")
-                    var data = JSON.parse(data);
-                    console.log("wrong" + data);
+                error: function(err) {
+                   alert(new Error(err))                  
                 }
 
             })
         } else {
-            console.log("没有获取到code值")
+           alert("没有获取到code值,请联系管理员")
         }
 
         weinxinJDK();
@@ -72,7 +65,7 @@ define(function(require) {
 
                 },
                 error: function(data) {
-
+                      alert("微信权限获取失败，请联系管理员")
                 }
             })
 

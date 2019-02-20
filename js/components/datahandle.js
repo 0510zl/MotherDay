@@ -10,8 +10,7 @@ define(function(require) {　
         constructor: Datahandle,
         //读取数据：
         getData: function() {
-            var _this = this;
-            //alert(this.title);
+            var _this = this;            
 
             return new Promise(function(resolve, reject) {
                 $.getJSON('./data/data.json?ran=' + new Date(), function(data, status) {
@@ -21,8 +20,7 @@ define(function(require) {　
                         })
                         resolve(data.data);
                     } else {
-
-                        reject(false);
+                        reject("获取数据出错，请联系管理员");
 
                     }
                 });
@@ -39,21 +37,18 @@ define(function(require) {　
                 //数据处理
                 //var transferData="name="+ obj.name +"&msg="+ obj.msg +"&piclist="+ obj.piclist;
                 //var transferData=JSON.stringify(obj);
-                console.log("obj" + obj.name);
+               
                 $.post(FileController, obj, function(data, status) {
-
                     // process response
                     if (status == "success" && data) {
 
                         var data = JSON.parse(data)
                           data.msg.data.forEach(function(item, index) {
                             item.lover = item.lover + 3000;
-                        })
-
-
+                        });
                         resolve(data);
                     } else {
-                        reject(false);
+                        reject("上传数据出错，请联系管理员");
                     }
                 })
 
@@ -67,8 +62,7 @@ define(function(require) {　
         alertLoverDataById: function(id) {
             var _this = this;
             var FileController = './php/alertdata.php';
-            return new Promise(function(resolve, reject) {
-                console.log("Datahandle-alertLoverDataById" + id)
+            return new Promise(function(resolve, reject) {               
                 if (id) {
                     var obj = { 'id': id };
                     $.post(FileController, obj, function(data, status) {
@@ -80,11 +74,11 @@ define(function(require) {　
                             })
                             resolve(data.data);
                         } else {
-                            reject(false);
+                            reject("获取数据出错，请联系管理员");
                         }
                     })
                 } else {
-                    reject(false)
+                    reject("Id值不存在，请联系管理员")
                 }
 
             })
@@ -94,7 +88,6 @@ define(function(require) {　
             var _this = this;
             id = id - 1000;
             return new Promise(function(resolve, reject) {
-
                 _this.getData().then(function(data) {
                     data.forEach(function(item) {
                         if (item.id === id) {
@@ -102,15 +95,10 @@ define(function(require) {　
 
                         }
                     })
-                    reject(false);
-
-
-                }, function(data) {
-
-                    reject(false);
+                    reject("获取数据出错，请联系管理员");
 
                 }).catch(function(err) {
-                    console.log(err);
+                    reject(err);
 
 
                 })
@@ -123,28 +111,21 @@ define(function(require) {　
             var _this = this;
 
             return new Promise(function(resolve, reject) {
-
                 _this.getData().then(function(data) {
                     var flag = false;
                     data.forEach(function(item) {
-                        if (item.openid === openid) {
-                            console.log("has me！---2");
+                        if (item.openid === openid) {                            
                             flag = true;
                             resolve(item);
                         }
                     })
-                    if (!flag) {
-                        console.log("has,t me！---2");
-                        reject(false);
+                    if (!flag) {                       
+                        reject("获取数据出错，请联系管理员");
                     }
-
-
-                }, function(data) {
-                    console.log("wrong");
-                    reject(false);
+                     
 
                 }).catch(function(err) {
-                    console.log(err);
+                    reject(err);
                 })
 
 

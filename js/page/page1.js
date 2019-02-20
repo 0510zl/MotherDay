@@ -18,81 +18,47 @@ define(function(require) {
          var data =(opt&&opt.data)?opt.data:"";
 
         var flag;
-        if(id){
-             console.log("come from search"+id);
-        }
-        if (data) {
-             console.log("data.msg.data"+data);
-            console.log("come from form"+data);
+       
+        if (data) {           
             datalist1 = data;
-        }
-        console.log("user" + sessionStorage.getItem('user'));
+        };        
         if (sessionStorage.getItem('user')) {
             user = JSON.parse(sessionStorage.getItem('user'));
         } else {
             tool.toreload();
-        }
+        };
         if (datalist1 && !id) { //解决点赞后页面数据读取不出
-            //datalist 有值
-            console.log("datalist1loverlist"+datalist1.loverlist);
+            //datalist 有值           
             dataShowlist(datalist1);
-        } else {
-            if (id) {
-                console.log("id get data");
-            } else {
-                console.log("no data");
-            }
+        } else {           
             //第一次载入
-            votehandle().getDataByOpenid(user.openid).then(function(data) {
-                console.log("getDataByOpenid");
+            votehandle().getDataByOpenid(user.openid).then(function(data) {               
                 loverlist = data;
                 if (id) {
                     return datahandle().getDataById(id);
-                } else {
-                    console.log("getDataByOpenid no id");
+                } else {                   
                     return datahandle().getData();
                 }
 
-            }, function(data) {
-                console.log("getDataByOpenid2");
-                loverlist = "";
-                if (id) {
-                    return datahandle().getDataById(id);
-                } else {
-                     console.log("getDataByOpenid2 no id");
-                    return datahandle().getData();
-                }
-
-            }).then(function(data) {
-                     console.log("getData");
+            }).then(function(data) {    
+                if(data){               
                     //保证getData与getDataById输出格式一致
                     if (id) {
                         var dataToArry = [];
                         dataToArry.push(data);
                         data = dataToArry;
-                    }
-
-                    data.loverlist = loverlist;
-                    if (data) {
-                        data.forEach(function(item) {
-                            console.log("haslovelist" + item)
-                        })
-                    }
-
+                     }
+                    data.loverlist = loverlist;                    
                     dataShowlist(data);
-                },
-                function(data) {
-                    noDataList(data);
-
-                }).catch(function(err) { console.log(err) });
-
-            function noDataList(data) {
-                console.log("getDataById2");
-                console.log("暂无数据")
-                $(".motherslist").empty();
-                $(".page1").show();
-                $(".motherslist").html("<p class='warn'>暂无数据<p>")
-            }
+                    }
+                    else{
+                            $(".motherslist").empty();
+                            $(".page1").show();
+                            $(".motherslist").html("<p class='warn'>暂无数据<p>")
+                    }
+               
+            }).catch(function(err) { alert(err) });
+         
 
         }
 
@@ -111,16 +77,12 @@ define(function(require) {
             var counter = 0; /*计数器*/
             var pageStart = 0; /*offset*/
             var pageSize = 6; /*每页显示数据条数*/
-
             txt = txt + getDataList(pageStart, pageSize);
-
-              var morebutton = $(".page1").find(".addmore>button");
-              morebutton.hide()
+           var morebutton = $(".page1").find(".addmore>button");
+           morebutton.hide()
             //按钮显示
-            console.log("ddddd" + datalist.length + Math.ceil(datalist.length / pageSize));
             if (Math.ceil(datalist.length / pageSize) > 1) {
-
-                console.log("morebutton" + morebutton.html());
+               
                 morebutton.show();
                 morebutton.tap(function() {
                     counter++;
@@ -146,7 +108,7 @@ define(function(require) {
                 var item,
                     txt = "";
                 var endsize = (startpos + size) > (datalist.length - 1) ? datalist.length : (startpos + size);
-                console.log("i" + endsize);
+              
                 for (var i = startpos; i < endsize; i++) {
 
                     item = datalist[i];
@@ -162,8 +124,7 @@ define(function(require) {
                 $(".motherslist ul").append(txt);
                 //绑定lover按钮动作
                 var doms = $(".motherslist").find("li");
-                for (var i = startpos; i < endsize; i++) {
-                    console.log("BindMotherMoreBtn" + i);
+                for (var i = startpos; i < endsize; i++) {                   
                     BindMotherMoreBtn(doms.eq(i));
                 }
             }
@@ -174,10 +135,8 @@ define(function(require) {
                 obj.forEach(function(item) {
                     var idnum = $(item).find("#idnum").html();
                     $(item).tap(function(e) {
-                        e.preventDefault();
-                        e.stopPropagation();
+                        e.preventDefault();                       
                         //获取数据
-
                         datahandle().getDataById(idnum).then(function(data) {
                             //数据绑定
                             $(".page").hide();
@@ -186,8 +145,7 @@ define(function(require) {
                             motherinfo.empty();
 
                             var squnum = 1000 + data.id;
-                            var txt = "<h3>" + data.name + "和她妈妈</h3>";
-                            console.log("datalist.loverlist3" + datalist.loverlist)
+                            var txt = "<h3>" + data.name + "和她妈妈</h3>";                        
 
                             txt = txt + BindLoveStatus(datalist.loverlist, data, data.lover);
                             txt = txt + "<p class='info'>" + data.msg + "</p>" +
@@ -202,7 +160,7 @@ define(function(require) {
                             BindLoverBtn($(".motherinfo").find(".zan"), squnum);
                         }).catch(function(err) {
                             //数据获取失败
-                            console.log(err);
+                            alert(err);
                         })
                     })
                     BindLoverBtn($(item).find(".zan"), idnum);
@@ -241,23 +199,17 @@ define(function(require) {
                     _this.attr("ctime", nowTime);
                     if (!user) {
                         user = JSON.parse(sessionStorage.getItem('user'));
-                    }
-                    console.log("page1-BindLoverBtn-openid" + user + id);
+                    }                   
 
-                    var count = 0;
-                    console.log(datalist);
+                    var count = 0;                   
 
                     if (datalist.loverlist) {
-                        var openid = user.openid;
-                        console.log("has datalist.loverlist");
-                        datalist.loverlist.forEach(function(item, index) {
-                            console.log(item.openid + "-----" + id + "------" + openid);
+                        var openid = user.openid;                       
+                        datalist.loverlist.forEach(function(item, index) {                          
                             if (item.openid === openid) {
-                                count++;
-                                console.log("count" + count);
+                                count++;                               
                             }
-                            if (item.openid === openid && item.loverid == id) {
-                                console.log("Votehandle——checkDataByopenid-reject");
+                            if (item.openid === openid && item.loverid == id) {                                
                                 flag = false;
                                 alert("你已经点赞过");
                                 return;
@@ -272,7 +224,6 @@ define(function(require) {
                         });
                     }
                     if (flag) {
-
                         datahandle().alertLoverDataById(id).then(function(data) {
                             //id修改后的lover值
                             if (data) {
@@ -283,18 +234,14 @@ define(function(require) {
                                     "loverid": id
                                 };
                                 return votehandle().writeData(str);
+                            }else{
+                                alert("点赞不成功,请在试试"); 
                             }
-                        }, function(data) {
-                            console.log("alertLoverDataById2" + data);
-                            alert("点赞不成功,请在试试");
-                            return;
-                        }).then(function(data) {
-                            console.log("writeData1" + data);
+                        }).then(function(data) {                           
                             if (data) {
                                 datalist = "";
                                 data2.loverlist = data;
-                                datalist1 = datalist = data2; //保存点赞后的数据
-                                console.log("datalist.loverlist2" + data);
+                                datalist1 = datalist = data2; //保存点赞后的数据                               
                                 dialog({
                                     title: "信息提示",
                                     content: "点赞成功"
@@ -302,12 +249,11 @@ define(function(require) {
                                     _this.find(".zanicon img").attr('src', './images/aixin.png');
                                     _this.find(".zannum").html(lovernum);
                                 });
+                            }else{
+                                 alert("点赞不成功,请再试试");
                             }
-                        }, function(data) {
-                            console.log("writeData2" + data);
-                            alert("点赞不成功,请再试试");
                         }).catch(function(err) {
-                            console.log(err);
+                            alert(err);
 
                         })
                     }
@@ -324,8 +270,7 @@ define(function(require) {
                         if (item2.loverid == item.id) {
                             flag = true;
                         }
-                    })
-                    console.log("flag" + flag);
+                    });                  
                     if (flag) {
                         txt = "<div class='zan'>" +
                             "<a class='zanicon'><img src='./images/aixin.png' class='on' /></a><span class='zannum'>" + lover + "</span></div>" +

@@ -43,13 +43,11 @@ require(['zepto', 'form', 'uploadpic', 'page1', 'button', 'weixin', 'tool'], fun
             //图片上传验证1~4
             $(".fileinput").on("change", function(e) {
                     e.preventDefault();
-                    e.stopPropagation();
                     uploadpic().valiPic(this, fileArr);
                 })
                 //form 表单提交
             $("form").submit(function(e) {
-                e.preventDefault();
-                e.stopPropagation();
+                e.preventDefault();                
                 var _this = $(this);
                 var but = _this.find('button[type=submit]');
                 but.html("正在提交...");
